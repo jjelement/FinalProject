@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Project.model.servlet;
+package Project.servlet;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -16,8 +16,9 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Joeseph-PC
  */
-@WebServlet(name = "CartServlet", urlPatterns = {"/cart"})
-public class CartServlet extends HttpServlet {
+@WebServlet(name = "LoginServlet", urlPatterns = {"/login"})
+public class LoginServlet extends HttpServlet {
+
 
     /**
      * Handles the HTTP <code>GET</code> method.
@@ -30,7 +31,7 @@ public class CartServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.getRequestDispatcher("/cart.jsp").forward(request, response);
+        request.getRequestDispatcher("/login.jsp").forward(request, response);
     }
 
     /**
@@ -44,7 +45,7 @@ public class CartServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.sendRedirect("checkout");
+        response.sendRedirect("home");
     }
 
     /**

@@ -43,5 +43,16 @@ footer p {
 
 main {
     margin-top: 3rem;
-    margin-bottom: 90px;
+    margin-bottom: 100px;
+}
+
+.fav-btn {
+    position: absolute;
+    right: 0px;
+    top: 5px;
+}
+
+.card-body > h4 > a {
+    text-decoration: none;
+    color: #000;
 }

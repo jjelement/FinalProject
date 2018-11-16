@@ -24,6 +24,7 @@
                         <c:forEach begin="1" end="6">
                             <div class="col-md-4">
                                 <div class="card mb-4 shadow-sm">
+                                    <button type="button" class="fav-btn btn btn-link" data-id="1"><i class="far fa-star fa-lg"></i></button>
                                     <img class="card-img-top" src="image/sn1.jpg" alt="PUREBOOST RBL SHOES">
                                     <div class="card-body">
                                         <h4><a href="product?id=1">PUREBOOST RBL SHOES</a></h4>
@@ -33,6 +34,7 @@
                                         <div class="row">
                                             <div class="col-6">
                                                 <a href="product?id=1" class="btn btn-primary btn-sm"><i class="fa fa-search"></i> View</a>
+                                                <button type="button" class="btn btn-outline-info btn-sm"><i class="fa fa-cart-arrow-down"></i></button>
                                             </div>
                                             <div class="col-6 text-right">
                                                 <small class="font-weight-bold">100.00</small>

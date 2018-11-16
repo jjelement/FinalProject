@@ -51,12 +51,6 @@
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label for="address" class="col-sm-3 col-form-label text-right">Address :</label>
-                    <div class="col-sm-6">
-                        <textarea class="form-control" name="address" id="address" placeholder="Your Address" rows="4"></textarea>
-                    </div>
-                </div>
-                <div class="form-group row">
                     <div class="offset-sm-3 col-sm-4">
                         <button type="submit" class="btn btn-outline-success btn-block"><i class="fa fa-user-plus"></i> Register</button>
                     </div>
