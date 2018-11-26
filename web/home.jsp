@@ -12,7 +12,7 @@
         <main role="main">
             <section class="jumbotron text-center">
                 <div class="container">
-                    <h1 class="jumbotron-heading">Welcome to " LUI-SHOP "</h1>
+                    <h1 class="jumbotron-heading">Welcome to <span class="label label-dark">LUI-SHOP</span></h1>
                     <p class="lead text-muted">Universe of sneakers</p>      
                 </div>
             </section>
