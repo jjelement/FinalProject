@@ -1,4 +1,9 @@
-package Project.model.servlet;
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package Project.servlet;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -11,8 +16,8 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Joeseph-PC
  */
-@WebServlet(name = "CheckoutServlet", urlPatterns = {"/checkout"})
-public class CheckoutServlet extends HttpServlet {
+@WebServlet(name = "RegisterServlet", urlPatterns = {"/register"})
+public class RegisterServlet extends HttpServlet {
 
     /**
      * Handles the HTTP <code>GET</code> method.
@@ -25,7 +30,7 @@ public class CheckoutServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.getRequestDispatcher("/checkout.jsp").forward(request, response);
+        request.getRequestDispatcher("/register.jsp").forward(request, response);
     }
 
     /**
@@ -39,7 +44,7 @@ public class CheckoutServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.sendRedirect("checkout");
+        response.sendRedirect("home");
     }
 
     /**

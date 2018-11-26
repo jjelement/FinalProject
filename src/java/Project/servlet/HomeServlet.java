@@ -1,4 +1,4 @@
-package Project.model.servlet;
+package Project.servlet;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
