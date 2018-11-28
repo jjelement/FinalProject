@@ -5,12 +5,15 @@
  */
 package Project.servlet;
 
+import Project.model.LineItem;
+import Project.model.ShoppingCart;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -44,7 +47,15 @@ public class CartServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.sendRedirect("checkout");
+        HttpSession session = request.getSession(true);
+        ShoppingCart cart = (ShoppingCart)session.getAttribute("cart");
+        
+        for(LineItem item : cart.getLineItems()) {
+            Integer qty = Integer.parseInt(request.getParameter("qty_" + item.getProduct().getId()));
+            item.setQuantity(qty);
+        }
+        session.setAttribute("success", "อัพเดทตะกร้าแล้ว");
+        response.sendRedirect("cart");
     }
 
     /**

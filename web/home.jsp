@@ -4,48 +4,108 @@
 <html lang="en">
     <head>
         <%@include file="components/head.jsp" %>
+        <style>
+            .bgimg-1, .bgimg-2, .bgimg-3, .bgimg-top {
+                position: relative;
+                opacity: 0.65;
+                background-attachment: fixed;
+                background-position: center;
+                background-repeat: no-repeat;
+                background-size: cover;
+
+            }
+            .bgimg-top {
+                background-image: url("assets/image/bg-top.jpg");
+            }
+            
+            .bgimg-1 {
+                background-image: url("assets/image/img_parallax.jpg");
+            }
+
+            .bgimg-2 {
+                background-image: url("assets/image/img_parallax2.jpg");
+            }
+
+            .bgimg-3 {
+                background-image: url("assets/image/img_parallax3.jpg");
+            }
+            
+            .section-title {
+                background-color: rgba(35, 35, 35, 0.7);
+                padding-top: 1.5rem;
+                padding-bottom: 1.5rem;
+                margin-bottom: 1.5rem;
+                color: #f8f9fa;
+            }
+            
+            @media only screen and (max-device-width: 1024px) {
+                .bgimg-1, .bgimg-2, .bgimg-3 {
+                    background-attachment: scroll;
+                }
+            }
+
+        </style>
     </head>
 
     <body>
         <%@include file="components/header.jsp" %>
 
         <main role="main">
-            <section class="jumbotron text-center">
-                <div class="container">
-                    <h1 class="jumbotron-heading">Welcome to <span class="label label-dark">LUI-SHOP</span></h1>
-                    <p class="lead text-muted">Universe of sneakers</p>      
-                </div>
-            </section>
+            <div class="bgimg-top">
+                <section class="jumbotron text-center">
+                    <div class="container text-light">
+                        <h1 class="jumbotron-heading">Welcome to <span class="p-2 text-light bg-secondary">LUI-SHOP</span></h1>
+                        <p class="lead text-muted">
+                            <hr>
+                            Universe of sneakers
+                        </p>      
+                    </div>
+                </section>
+            </div>
 
-            <div class="album py-5 bg-light">
-                <div class="container">
-
-                    <div class="row">          
-                        <c:forEach begin="1" end="6">
-                            <div class="col-md-4">
-                                <div class="card mb-4 shadow-sm">
-                                    <button type="button" class="fav-btn btn btn-link" data-id="1"><i class="far fa-star fa-lg"></i></button>
-                                    <img class="card-img-top" src="image/sn1.jpg" alt="PUREBOOST RBL SHOES">
-                                    <div class="card-body">
-                                        <h4><a href="product?id=1">PUREBOOST RBL SHOES</a></h4>
-                                        <p class="card-text">
-                                            WINTER-READY RUNNING SHOES WITH AN ADAPTIVE FIT AND LOW-TO-THE-GROUND FEEL.
-                                        </p>
-                                        <div class="row">
-                                            <div class="col-6">
-                                                <a href="product?id=1" class="btn btn-primary btn-sm"><i class="fa fa-search"></i> View</a>
-                                                <button type="button" class="btn btn-outline-info btn-sm"><i class="fa fa-cart-arrow-down"></i></button>
-                                            </div>
-                                            <div class="col-6 text-right">
-                                                <small class="font-weight-bold">100.00</small>
-                                            </div>
-                                        </div>
+            <div class="album">
+                <c:forEach items="${brands}" var="brand" varStatus="i">
+                    <div class="bgimg-${i.count}">
+                        <div class="section-title">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-sm-11">
+                                        <h1 class="display-4">${brand.name}</h1>
+                                    </div>
+                                    <div class="col-sm-1 text-right my-auto">
+                                        <a href="brand?id=${brand.id}" class="text-light align-middle"><i class="fa fa-plus-circle"></i> More</a>
                                     </div>
                                 </div>
                             </div>
-                        </c:forEach>
+                        </div>
+                        <div class="container pb-5">
+                            <div class="row">          
+                                <c:forEach items="${brand.productList.subList(0, 3)}" var="product" varStatus="j">
+                                    <div class="col-md-4">
+                                        <div class="card mb-4 shadow-sm">
+                                            <button type="button" class="fav-btn btn btn-link" data-id="1"><i class="far fa-star fa-lg"></i></button>
+                                            <img class="card-img-top" src="assets/image/product/${product.id}/1.jpg" alt="${product.name}">
+                                            <div class="card-body">
+                                                <h4><a href="product?id=1">${product.name}</a></h4>
+                                                <p class="card-text">
+                                                    ${product.detail.substring(0, 60)}...
+                                                </p>
+                                                <div class="row">
+                                                    <div class="col-6">
+                                                        <a href="product?id=${product.id}" class="btn btn-primary btn-sm"><i class="fa fa-search"></i> View</a>
+                                                    </div>
+                                                    <div class="col-6 text-right">
+                                                        <small class="font-weight-bold"><fmt:formatNumber value="${product.price}" minFractionDigits="2" /></small>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </c:forEach>
+                            </div>
+                        </div>
                     </div>
-                </div>
+                </c:forEach>
             </div>
 
         </main>

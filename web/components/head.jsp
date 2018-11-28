@@ -9,5 +9,7 @@
 <!-- Bootstrap core CSS -->
 <link rel="stylesheet" href="assets/css/bootstrap.min.css">
 <!-- Custom styles for this template -->
-<link href="assets/css/album.css" rel="stylesheet">
+<link href="assets/css/toastr.min.css" rel="stylesheet">
+<link href="assets/css/bootstrap-slider.min.css" rel="stylesheet">
 <link href="assets/fontawesome/css/all.css" rel="stylesheet">
+<link href="assets/css/album.css" rel="stylesheet">

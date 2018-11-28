@@ -5,12 +5,20 @@
  */
 package Project.servlet;
 
+import Project.controller.ProductJpaController;
+import Project.model.Product;
+import Project.model.ShoppingCart;
 import java.io.IOException;
+import javax.annotation.Resource;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.PersistenceUnit;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import javax.transaction.UserTransaction;
 
 /**
  *
@@ -18,6 +26,12 @@ import javax.servlet.http.HttpServletResponse;
  */
 @WebServlet(name = "ProductServlet", urlPatterns = {"/product"})
 public class ProductServlet extends HttpServlet {
+    
+    @PersistenceUnit(unitName = "LuiShopPU")
+    EntityManagerFactory emf;
+    
+    @Resource
+    UserTransaction utx;
 
     /**
      * Handles the HTTP <code>GET</code> method.
@@ -30,8 +44,23 @@ public class ProductServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-//        Integer productId = Integer.parseInt(request.getParameter("id") != null ? request.getParameter("id") : 1);
-        request.getRequestDispatcher("/product.jsp").forward(request, response);
+        try {
+            Integer productId = Integer.parseInt(request.getParameter("id"));
+            ProductJpaController productController = new ProductJpaController(utx, emf);
+            Product product = productController.findProduct(productId);
+            
+            if(product == null) {
+                HttpSession session = request.getSession(true);
+                session.setAttribute("error", "ไม่พบสินค้านี้");
+                response.sendRedirect("home");
+            } else {
+                request.setAttribute("product", product);
+                request.getRequestDispatcher("/product.jsp").forward(request, response);
+            }
+        } catch(Exception e) {
+            System.out.println(e);
+            response.sendRedirect("home");
+        }
     }
 
     /**
@@ -45,7 +74,28 @@ public class ProductServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.sendRedirect("product");
+        Integer productId = null;
+        try {
+            productId = Integer.parseInt(request.getParameter("id"));
+            ProductJpaController productController = new ProductJpaController(utx, emf);
+            Product product = productController.findProduct(productId);
+            
+            HttpSession session = request.getSession(true);
+            
+            if(product == null) {
+                session.setAttribute("error", "ไม่พบสินค้านี้");
+                response.sendRedirect("home");
+            } else {
+                ShoppingCart cart = (ShoppingCart) session.getAttribute("cart");
+                cart.add(product);
+                session.setAttribute("cart", cart);
+                session.setAttribute("success", "เพิ่มสินค้าลงตะกร้าแล้ว");
+            response.sendRedirect("product?id="+productId);
+            }
+        } catch(Exception e) {
+            System.out.println(e);
+            response.sendRedirect("home");
+        }
     }
 
     /**

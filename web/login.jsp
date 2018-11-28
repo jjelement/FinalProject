@@ -12,11 +12,12 @@
         <main role="main" class="container">
             <h1 class="display-4">Login <small class="text-muted" style="font-size: 24px">- เข้าสู่ระบบ</small></h1>
             <hr>
+            <%@include file="components/alert.jsp" %>
             <form action="login" method="POST">
                 <div class="form-group row">
                     <label for="email" class="col-sm-3 col-form-label text-right">Email :</label>
                     <div class="col-sm-6">
-                        <input type="email" class="form-control" id="email" name="email" placeholder="youremail@example.com" required>
+                        <input type="email" class="form-control" id="email" name="email" placeholder="youremail@example.com" required value="${email}">
                     </div>
                 </div>
                 <div class="form-group row">
